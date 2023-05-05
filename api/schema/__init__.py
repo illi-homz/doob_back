@@ -1,7 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
 from api import models
-
+from . import event
 
 class AnyType(DjangoObjectType):
     class Meta:
@@ -15,7 +15,7 @@ class BannerType(DjangoObjectType):
         fields = ("id", "title", "img")
 
 
-class Query(graphene.ObjectType):
+class Query(event.Query, graphene.ObjectType):
     all_anys = graphene.List(AnyType)
     all_banners = graphene.List(BannerType)
     hello = graphene.String(default_value="Hi!")
